@@ -13,9 +13,9 @@ O projeto inclui ferramentas para publicação de mensagens em sistemas de mensa
     - `broker`: endereço do broker Kafka (ex: `localhost:9092`)
     - `topic`: nome do tópico de destino
     - `message`: mensagem a ser publicada
-  - Exemplo de chamada:
+  - Exemplo de invocação da ferramenta no github copilotchat:
     ```
-    KafkaPublisherTool.PublishMessage("localhost:9092", "meu-topico", "mensagem de teste")
+        envie a mensagem ```json { “message”: “publicando mensagens no kafka” } ``` para o broker `localhost:9092` no tópico `Teste`
     ```
 - **Observações:** Exibe no console o offset da mensagem publicada ou o erro ocorrido.
 
@@ -27,9 +27,9 @@ O projeto inclui ferramentas para publicação de mensagens em sistemas de mensa
     - `host`: endereço do servidor RabbitMQ (ex: `localhost`)
     - `queue`: nome da fila de destino
     - `message`: mensagem a ser publicada
-  - Exemplo de chamada:
+  - Exemplo de invocação da ferramenta no github copilotchat:
     ```
-    RabbitMqPublisherTool.PublishMessageAsync("localhost", "minha-fila", "mensagem de teste")
+        envie a mensagem "mensagem de teste" para a fila "minha-fila" no RabbitMQ em `localhost`    
     ```
 - **Observações:** Exibe no console confirmação de publicação ou o erro ocorrido.
 
