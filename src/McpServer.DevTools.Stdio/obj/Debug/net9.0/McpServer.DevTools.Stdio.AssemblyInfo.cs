@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("McpServer.DevTools.Stdio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49e7a126a1d2cba5ee769f11ec71da58c5b90326")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fdb31c2ca2fd4f3519dfa151105e17469abc6fa8")]
 [assembly: System.Reflection.AssemblyProductAttribute("McpServer.DevTools.Stdio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("McpServer.DevTools.Stdio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,7 +8,7 @@ namespace McpServer.DevTools.Stdio;
 public class KafkaPublisherTool
 {
     [McpServerTool, Description("Publishes a message to a Kafka topic")]
-    public static void PublishMessage(string broker, string topic, string message)
+    public static void PublishMessageToTopic(string broker, string topic, string message)
     {
         if (string.IsNullOrEmpty(broker))
         {

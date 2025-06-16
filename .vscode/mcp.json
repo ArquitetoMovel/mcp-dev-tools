@@ -1,0 +1,9 @@
+{
+    "servers": {
+        "Developer Tools": {
+            "type": "stdio",
+            "command": "dotnet",
+            "args": ["src/McpServer.DevTools.Stdio/bin/Debug/net9.0/McpServer.DevTools.Stdio.dll"]
+        }
+    }
+}

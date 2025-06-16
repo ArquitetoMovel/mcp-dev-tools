@@ -8,24 +8,21 @@ namespace McpServer.DevTools.Stdio;
 public class RabbitMqPublisherTool
 {
   [McpServerTool, Description("Publishes a message to a RabbitMQ queue")]
-  public static async Task PublishMessageAsync(string host, string queue, string message)
+  public static async Task<string> PublishMessageToQueue(string host, string queue, string message, string? userName = null, string? password = null)
   {
-    if (string.IsNullOrEmpty(host))
-    {
-      throw new ArgumentException("Host cannot be null or empty", nameof(host));
-    }
-    if (string.IsNullOrEmpty(queue))
-    {
-      throw new ArgumentException("Queue cannot be null or empty", nameof(queue));
-    }
-    if (string.IsNullOrEmpty(message))
-    {
-      throw new ArgumentException("Message cannot be null or empty", nameof(message));
-    }
-
-    var factory = new ConnectionFactory() { HostName = host };
     try
     {
+      ArgumentException.ThrowIfNullOrEmpty(host, nameof(host));
+      ArgumentException.ThrowIfNullOrEmpty(queue, nameof(queue));
+      ArgumentException.ThrowIfNullOrEmpty(message, nameof(message));
+
+      var factory = new ConnectionFactory() { HostName = host };
+      if (!string.IsNullOrEmpty(userName))
+        factory.UserName = userName;
+
+      if (!string.IsNullOrEmpty(password))
+        factory.Password = password;
+
       await using var connection = await factory.CreateConnectionAsync();
       var channel = await connection.CreateChannelAsync();
       await channel.QueueDeclareAsync(queue: queue, durable: false, exclusive: false, autoDelete: false, arguments: null);
@@ -35,11 +32,12 @@ public class RabbitMqPublisherTool
       await channel.CloseAsync();
       await channel.DisposeAsync();
       Console.WriteLine($"Mensagem publicada com sucesso na fila '{queue}'");
+      return $"Mensagem publicada com sucesso na fila '{queue}'";
     }
     catch (Exception ex)
     {
       Console.Error.WriteLine($"Erro ao publicar mensagem no RabbitMQ: {ex.Message}");
-      throw;
+      return $"Erro ao publicar mensagem no RabbitMQ: {ex.Message} \n\t {ex.StackTrace}";
     }
   }
 }

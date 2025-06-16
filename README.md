@@ -24,14 +24,32 @@ O projeto inclui ferramentas para publicação de mensagens em sistemas de mensa
 - **Descrição:** Publica mensagens em uma fila RabbitMQ.
 - **Uso:**
   - Parâmetros:
-    - `host`: endereço do servidor RabbitMQ (ex: `localhost`)
+    - `host`: endereço do servidor RabbitMQ (ex: `localhost:5672`)
     - `queue`: nome da fila de destino
     - `message`: mensagem a ser publicada
   - Exemplo de invocação da ferramenta no github copilotchat:
     ```
-        envie a mensagem "mensagem de teste" para a fila "minha-fila" no RabbitMQ em `localhost`    
+        envie a mensagem ```json {"message": "mensagem de teste"}``` para a fila `minha-fila` no RabbitMQ em `localhost:5672` com o usuário `admin` e senha `admin`    
     ```
 - **Observações:** Exibe no console confirmação de publicação ou o erro ocorrido.
+
+
+## Adicionando Ferramentas ao VS Code
+Para adicionar as ferramentas de publicação de mensagens ao Visual Studio Code, siga os passos abaixo:
+1. Abra o Visual Studio Code.
+2. Acesse a aba de extensões (ícone de quadrado no menu lateral).
+3. Pesquise por "MCP Tool" ou "Ferramentas MCP".
+4. Instale a extensão correspondente.
+    ```json
+       "servers": {
+        "Developer Tools": {
+            "type": "stdio",
+            "command": "dotnet",
+            "args": ["src/McpServer.DevTools.Stdio/bin/Debug/net9.0/McpServer.DevTools.Stdio.dll"]
+        }
+    }
+    ```
+5. Após a instalação, as ferramentas estarão disponíveis para uso diretamente no editor.
 
 
 ## Containers de Desenvolvimento para Mensageria e Streaming de teste
