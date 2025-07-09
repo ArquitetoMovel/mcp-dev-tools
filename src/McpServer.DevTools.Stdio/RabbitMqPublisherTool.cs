@@ -8,15 +8,26 @@ namespace McpServer.DevTools.Stdio;
 public class RabbitMqPublisherTool
 {
   [McpServerTool, Description("Publishes a message to a RabbitMQ queue")]
-  public static async Task<string> PublishMessageToQueue(string host, string queue, string message, string? userName = null, string? password = null)
+  public static async Task<string> PublishMessageToQueue(string host, string port, string queue, string message, string? userName = null, string? password = null)
   {
     try
     {
       ArgumentException.ThrowIfNullOrEmpty(host, nameof(host));
       ArgumentException.ThrowIfNullOrEmpty(queue, nameof(queue));
       ArgumentException.ThrowIfNullOrEmpty(message, nameof(message));
+      ArgumentException.ThrowIfNullOrEmpty(port, nameof(port));
 
-      var factory = new ConnectionFactory() { HostName = host };
+      // vaidate host, accept without port, only host or ip or ip:port
+      if (!Uri.TryCreate($"amqp://{host}:{port}", UriKind.Absolute, out var uri) || uri.Scheme != "amqp")
+      {
+        throw new ArgumentException("Invalid RabbitMQ host or port format. Use 'host:port' or 'ip:port'.", nameof(host));
+      }
+
+      var factory = new ConnectionFactory() 
+      { 
+        HostName = host,
+        Port = port != string.Empty ? int.Parse(port) : AmqpTcpEndpoint.UseDefaultPort,
+      };
       if (!string.IsNullOrEmpty(userName))
         factory.UserName = userName;
 
